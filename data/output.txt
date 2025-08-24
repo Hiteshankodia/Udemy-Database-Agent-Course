@@ -1,0 +1,11 @@
+Final Answer
+The grade with the highest average base salary is 'EX0', with an average base salary of 292,000. However, for this grade, there are no female employees listed, and the average base salary is only available for males, which is 292,000.
+
+Explanation:
+To arrive at this answer:
+
+I used the Base_Salary column to calculate the average salary for each grade using the groupby method.
+I identified the grade with the highest average base salary ('EX0') using the idxmax() function.
+I filtered the dataframe for this grade and calculated gender-specific average salaries by grouping the filtered data by the Gender column and calculating the mean for the Base_Salary column.
+Both methods confirmed that 'EX0' is the grade with the highest average base salary, and only male employees are recorded for this grade with an average salary of 292,000.
+This thorough double-check ensures the accuracy of the result.
