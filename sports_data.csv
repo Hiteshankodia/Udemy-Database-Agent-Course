@@ -1,0 +1,13 @@
+team_id,team_name,player_id,player_name,position,game_id,opponent_team_id,opponent_team_name,game_date,home_team,score,opponent_score
+1,Sharks,1,John Doe,Forward,101,2,Tigers,2025-03-20,Sharks,95,88
+1,Sharks,2,Jane Smith,Guard,101,2,Tigers,2025-03-20,Sharks,95,88
+1,Sharks,3,Alex Johnson,Center,102,3,Lions,2025-03-22,Sharks,110,105
+2,Tigers,4,Chris Lee,Forward,102,3,Lions,2025-03-22,Tigers,105,110
+2,Tigers,5,Mia Wang,Guard,103,1,Sharks,2025-03-20,Tigers,88,95
+3,Lions,6,David Brown,Center,103,1,Sharks,2025-03-20,Lions,105,110
+3,Lions,7,Susan Clark,Guard,104,4,Wolves,2025-03-24,Lions,120,112
+4,Wolves,8,Matt White,Forward,104,4,Wolves,2025-03-24,Wolves,120,112
+4,Wolves,9,Katie Green,Guard,105,5,Bears,2025-03-26,Wolves,98,95
+5,Bears,10,Samuel King,Center,105,5,Bears,2025-03-26,Bears,98,95
+5,Bears,11,Amy Scott,Guard,106,6,Cheetahs,2025-03-28,Bears,115,110
+6,Cheetahs,12,Nate Adams,Forward,106,6,Cheetahs,2025-03-28,Cheetahs,115,110
