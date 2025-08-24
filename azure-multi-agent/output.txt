@@ -1,0 +1,82 @@
+(venv) C:\Demo Projects\Database Agents Udemy\azure-multi-agent>python db-agent.py
+C:\Demo Projects\Database Agents Udemy\azure-multi-agent\sql_agent.py:4: LangChainDeprecationWarning: Importing create_sql_agent from langchain.agents is deprecated. Please replace deprecated imports:
+
+>> from langchain.agents import create_sql_agent
+
+with new imports of:
+
+>> from langchain_community.agent_toolkits.sql.base import create_sql_agent
+You can use the langchain cli to **automatically** upgrade many imports. Please see documentation here <https://python.langchain.com/docs/versions/v0_2/>
+  from langchain.agents import create_sql_agent
+Connection successful to Azure SQL Database!
+SQLAlchemy engine for Azure SQL Database created successfully!
+result
+3
+
+
+> Entering new AgentExecutor chain...
+
+Invoking: `get_word_length` with `{'word': 'abc'}`
+
+
+3The length of the character 'abc' is 3.
+
+> Finished chain.
+agent :  {'input': "What is the length of this character - 'abc'", 'output': "The length of the character 'abc' is 3."}
+
+
+> Entering new AgentExecutor chain...
+
+Invoking: `sql_agent` with `{'query': 'SELECT name FROM movies ORDER BY budget DESC LIMIT 1;'}`
+
+
+
+
+> Entering new SQL Agent Executor chain...
+Action: sql_db_list_tables
+Action Input: 
+""movieThe database contains a table named `movie`. I will now query the schema of the `movie` table to understand its structure and find the relevant columns for the question.
+
+Action: sql_db_schema
+Action Input: movie
+CREATE TABLE movie (
+        movie_id BIGINT NULL, 
+        title VARCHAR(max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, 
+        genre VARCHAR(max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, 
+        release_date VARCHAR(max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, 
+        budget BIGINT NULL, 
+        revenue BIGINT NULL, 
+        runtime BIGINT NULL, 
+        vote_average FLOAT(53) NULL, 
+        vote_count BIGINT NULL
+)
+
+/*
+3 rows from movie table:
+movie_id        title   genre   release_date    budget  revenue runtime vote_average    vote_count
+1       The Shawshank Redemption        Drama   1994-09-23      25000000        28341469        142     9.3     2481600
+2       The Godfather   Crime, Drama    1972-03-24      60000000        250000000       175     9.2     1651588
+3       The Dark Knight Action, Crime, Drama    2008-07-18      185000000       1004558444      152     9.0     2505037
+*/The `movie` table contains a `budget` column, which is relevant to the question. I will now construct a query to find the movie with the highest budget.
+
+Action: sql_db_query_checker
+Action Input: SELECT TOP 1 title FROM movie ORDER BY budget DESC;```sql
+SELECT TOP 1 title FROM movie ORDER BY budget DESC;
+```The query is correct. I will now execute it to find the movie with the highest budget.
+
+Action: sql_db_query
+Action Input: SELECT TOP 1 title FROM movie ORDER BY budget DESC;[('The Dark Knight',)]Final Answer: The movie with the highest budget is "The Dark Knight".
+
+Explanation:
+To answer the question, I queried the `movie` table to select the `title` of the movie with the highest `budget`. The query was constructed as follows:
+
+```sql
+SELECT TOP 1 title FROM movie ORDER BY budget DESC;
+```
+
+This query retrieves the title of the movie with the highest budget by ordering the results in descending order of the `budget` columnThis query retrieves the title of the movie with the highest budget by ordering the results in descending order of the `budget` column and limiting the output to the top result. The result was "The Dark Knight".
+
+> Finished chain.
+{'input': 'SELECT name FROM movies ORDER BY budget DESC LIMIT 1;', 'output': 'The movie with the highest budget is "The Dark Knight".\{'input': 'SELECT name FROM movies ORDER BY budget DESC LIMIT 1;', 'output': 'The movie with the highest budget is "The Dark Knight".\n\nExplanation:\nTo answer the question, I queried the `movie` table to select the `title` of the movie with the highest `budget`. The query was constructed as follows:\n\n```sql\nSELECT TOP 1 title FROM movie ORDER BY budget DESC;\n```\n\nThis query retrieves the title of the movie with the highest budget by ordering the results in descending order of the `budget` column and limiting the output to the top result. The result was "The Dark Knight".'}The movie with the highest budget is "The Dark Knight."
+
+> Finished chain.
